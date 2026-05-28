@@ -1,12 +1,12 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   application:
-    name: catalogue
+    name: orders
 
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/catalogue_db}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/orders_db}
     driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
     username: ${DB_USER:root}
     password: ${DB_PASSWORD:mysql}
@@ -30,8 +30,15 @@ eureka:
   instance:
     prefer-ip-address: true
 
+# Feign Client Configuration (uses service name, not IP/port)
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+
 logging:
   level:
     org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    org.springframework.data.jpa: DEBUG
+    com.unir.relatos.orders: DEBUG

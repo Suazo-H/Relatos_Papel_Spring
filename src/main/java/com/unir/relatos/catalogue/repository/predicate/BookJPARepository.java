@@ -1,8 +1,8 @@
 package com.unir.relatos.catalogue.repository.predicate;
 
 import com.unir.relatos.catalogue.repository.model.Book;
-import org.springframework.data.jpa.repository. JpaRepository;
-import org.springframework.data.jpa. repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 public interface BookJPARepository extends
-    JpaRepository<Book, Integer>,
-    JpaSpecificationExecutor <Book>,
-    PagingAndSortingRepository<Book, Integer>{
+        JpaRepository<Book, Integer>,
+        JpaSpecificationExecutor<Book>,
+        PagingAndSortingRepository<Book, Integer> {
 
     @Query("SELECT b FROM Book b WHERE b.stock > 0")
     List<Book> findAvailableBooks();
