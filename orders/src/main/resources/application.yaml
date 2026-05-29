@@ -42,3 +42,12 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     com.unir.relatos.orders: DEBUG
+
+# SpringDoc OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
