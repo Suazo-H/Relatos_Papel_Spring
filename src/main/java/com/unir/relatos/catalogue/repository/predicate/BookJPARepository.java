@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 public interface BookJPARepository extends
-        JpaRepository<Book, Integer>,
+        JpaRepository<Book, Long>,
         JpaSpecificationExecutor<Book>,
-        PagingAndSortingRepository<Book, Integer> {
+        PagingAndSortingRepository<Book, Long> {
 
     @Query("SELECT b FROM Book b WHERE b.stock > 0")
     List<Book> findAvailableBooks();

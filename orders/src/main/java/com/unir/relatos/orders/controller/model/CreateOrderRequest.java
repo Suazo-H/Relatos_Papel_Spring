@@ -25,7 +25,7 @@ public class CreateOrderRequest {
     @AllArgsConstructor
     @Builder
     public static class OrderItemRequest {
-        private Integer bookId;
+        private Long bookId;
         private Integer quantity;
     }
 }

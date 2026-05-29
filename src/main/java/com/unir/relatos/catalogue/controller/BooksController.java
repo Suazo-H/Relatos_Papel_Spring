@@ -55,7 +55,7 @@ public class BooksController {
      */
     @GetMapping("books/{bookId}")
     public ResponseEntity<GetBookResponseDto> getBook(@PathVariable Long bookId) {
-        return ResponseEntity.ok(getBooksService.getBook(bookId.intValue()));
+        return ResponseEntity.ok(getBooksService.getBook(bookId));
     }
 
     /**
@@ -73,7 +73,7 @@ public class BooksController {
     public ResponseEntity<GetBookResponseDto> updateBook(
             @PathVariable Long bookId,
             @RequestBody WriteBookRequestDto request) {
-        return ResponseEntity.ok(modifyBooksService.modifyBook(bookId.intValue(), request));
+        return ResponseEntity.ok(modifyBooksService.modifyBook(bookId, request));
     }
 
     /**
@@ -83,7 +83,7 @@ public class BooksController {
     public ResponseEntity<GetBookResponseDto> patchBook(
             @PathVariable Long bookId,
             @RequestBody String jsonPart) {
-        return ResponseEntity.ok(modifyBooksService.modifyBook(bookId.intValue(), jsonPart));
+        return ResponseEntity.ok(modifyBooksService.modifyBook(bookId, jsonPart));
     }
 
     /**
@@ -91,7 +91,7 @@ public class BooksController {
      */
     @DeleteMapping("books/{bookId}")
     public ResponseEntity<Void> deleteBook(@PathVariable Long bookId) {
-        deleteBooksService.deleteBook(bookId.intValue());
+        deleteBooksService.deleteBook(bookId);
         return ResponseEntity.noContent().build();
     }
 }

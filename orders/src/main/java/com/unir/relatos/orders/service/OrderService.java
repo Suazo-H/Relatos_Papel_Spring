@@ -111,7 +111,7 @@ public class OrderService {
      * Validate a book exists, is visible, and has sufficient stock.
      * Communicates with the Catalogue microservice via Feign (using Eureka service discovery).
      */
-    private BookResponse validateBook(Integer bookId, Integer requestedQuantity) {
+    private BookResponse validateBook(Long bookId, Integer requestedQuantity) {
         try {
             log.debug("Validating book {} with catalogue service", bookId);
             BookResponse book = catalogueClient.getBook(bookId);

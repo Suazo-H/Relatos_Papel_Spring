@@ -32,7 +32,7 @@ public class OrderResponse {
     @Builder
     public static class OrderItemResponse {
         private Long id;
-        private Integer bookId;
+        private Long bookId;
         private String bookTitle;
         private String bookIsbn;
         private Integer quantity;

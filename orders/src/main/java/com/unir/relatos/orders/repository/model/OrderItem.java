@@ -25,7 +25,7 @@ public class OrderItem {
     private Order order;
 
     @Column(name = "book_id", nullable = false)
-    private Integer bookId;
+    private Long bookId;
 
     @Column(name = "book_title", nullable = false)
     private String bookTitle;

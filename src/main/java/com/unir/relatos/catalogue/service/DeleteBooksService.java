@@ -13,7 +13,7 @@ public class DeleteBooksService {
     private final BookJPARepository bookJPARepository;
 
     @Transactional
-    public void deleteBook(int bookId) {
+    public void deleteBook(Long bookId) {
         if(!bookJPARepository.existsById(bookId)) {
             throw new BookNotFoundException("Book with ID " + bookId + " not found");
         }

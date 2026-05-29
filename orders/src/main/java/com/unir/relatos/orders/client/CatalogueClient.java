@@ -18,5 +18,5 @@ public interface CatalogueClient {
      * Used to validate that books exist and are available before creating an order.
      */
     @GetMapping("/api/v1/books/{bookId}")
-    BookResponse getBook(@PathVariable("bookId") Integer bookId);
+    BookResponse getBook(@PathVariable("bookId") Long bookId);
 }

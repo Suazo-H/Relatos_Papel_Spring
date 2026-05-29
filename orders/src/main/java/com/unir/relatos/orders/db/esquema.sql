@@ -35,7 +35,7 @@ CREATE TABLE order_items (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     
     order_id BIGINT NOT NULL,
-    book_id INT NOT NULL,
+    book_id BIGINT NOT NULL,
     book_title VARCHAR(255) NOT NULL,
     book_isbn VARCHAR(20),
     

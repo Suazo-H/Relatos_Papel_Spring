@@ -34,7 +34,7 @@ public class GetBooksService {
     }
 
     @Transactional(readOnly = true)
-    public GetBookResponseDto getBook(Integer bookId) {
+    public GetBookResponseDto getBook(Long bookId) {
         Optional<Book> book = repository.findById(bookId);
         return book.map(mapper::asGetBookResponseDto)
                 .orElseThrow(() -> new BookNotFoundException("Book not found with id: " + bookId));

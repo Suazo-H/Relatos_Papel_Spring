@@ -67,7 +67,7 @@ public class BookMapper {
                 .build();
     }
 
-    public Book asBook(Integer bookId, WriteBookRequestDto bookDto) {
+    public Book asBook(Long bookId, WriteBookRequestDto bookDto) {
         // Verify book exists
         if (!bookJpaRepository.existsById(bookId)) {
             throw new BookNotFoundException("Book with ID " + bookId + " not found.");
