@@ -2,6 +2,7 @@ package com.unir.relatos.orders.controller;
 
 import com.unir.relatos.orders.exception.BookValidationException;
 import com.unir.relatos.orders.exception.OrderNotFoundException;
+import com.unir.relatos.orders.exception.ServiceUnavailableException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,17 @@ public class OrdersControllerAdvice {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Map.of(
                         "error", "Book Validation Failed",
+                        "message", ex.getMessage(),
+                        "timestamp", LocalDateTime.now()
+                ));
+    }
+
+    @ExceptionHandler(ServiceUnavailableException.class)
+    public ResponseEntity<Map<String, Object>> handleServiceUnavailable(ServiceUnavailableException ex) {
+        log.error("Service unavailable: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(Map.of(
+                        "error", "Service Unavailable",
                         "message", ex.getMessage(),
                         "timestamp", LocalDateTime.now()
                 ));

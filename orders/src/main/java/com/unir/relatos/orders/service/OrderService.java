@@ -7,6 +7,7 @@ import com.unir.relatos.orders.controller.model.OrderResponse;
 import com.unir.relatos.orders.controller.model.OrdersListResponse;
 import com.unir.relatos.orders.exception.BookValidationException;
 import com.unir.relatos.orders.exception.OrderNotFoundException;
+import com.unir.relatos.orders.exception.ServiceUnavailableException;
 import com.unir.relatos.orders.repository.OrderRepository;
 import com.unir.relatos.orders.repository.model.Order;
 import com.unir.relatos.orders.repository.model.OrderItem;
@@ -34,6 +35,11 @@ public class OrderService {
      */
     @Transactional
     public OrderResponse createOrder(CreateOrderRequest request) {
+        // Validate request
+        if (request == null || request.getUserId() == null || request.getItems() == null || request.getItems().isEmpty()) {
+            throw new BookValidationException("An order must include a user ID and at least one item");
+        }
+        
         log.info("Creating order for user: {}", request.getUserId());
 
         // Build the order
@@ -48,6 +54,11 @@ public class OrderService {
 
         // Validate each book and create order items
         for (CreateOrderRequest.OrderItemRequest itemRequest : request.getItems()) {
+            // Validate item has valid bookId and positive quantity
+            if (itemRequest.getBookId() == null || itemRequest.getQuantity() == null || itemRequest.getQuantity() <= 0) {
+                throw new BookValidationException("Each order item must include a book ID and a positive quantity");
+            }
+            
             BookResponse book = validateBook(itemRequest.getBookId(), itemRequest.getQuantity());
 
             BigDecimal unitPrice = BigDecimal.valueOf(book.getPrice());
@@ -134,7 +145,7 @@ public class OrderService {
             throw new BookValidationException("Book with ID " + bookId + " not found in catalogue");
         } catch (FeignException e) {
             log.error("Error communicating with catalogue service: {}", e.getMessage());
-            throw new BookValidationException("Unable to validate book. Catalogue service unavailable.");
+            throw new ServiceUnavailableException("Unable to validate book. Catalogue service unavailable.");
         }
     }
 

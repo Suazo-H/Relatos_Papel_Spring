@@ -184,7 +184,7 @@ El microservicio Orders se comunica con Catalogue usando **Feign Client** y **Eu
 
 - NO usa IP ni puerto directamente
 - Usa el nombre del servicio: `@FeignClient(name = "catalogue")`
-- Eureka resuelve el nombre al instancia disponible
+- Eureka resuelve el nombre a la instancia disponible
 - Soporta balanceo de carga del lado del cliente
 
 ## Estructura del Proyecto

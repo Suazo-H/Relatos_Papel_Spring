@@ -93,6 +93,7 @@ spring:
             - Path=/api/v1/catalogue/search
             - Method=POST
           filters:
+            - SetRequestHeader=X-HTTP-Method-Override, GET
             - RewritePath=/api/v1/catalogue/search, /api/v1/books
             - SetRequestHeader=X-Transcribed-From, POST
         

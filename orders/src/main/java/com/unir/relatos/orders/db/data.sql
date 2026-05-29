@@ -6,11 +6,11 @@ USE orders_db;
 
 -- Insertar algunas órdenes de ejemplo
 INSERT INTO orders (user_id, user_email, total_amount, status, created_at) VALUES
-(1, 'usuario1@example.com', 54.48, 'CONFIRMED', '2024-01-15 10:30:00'),
+(1, 'usuario1@example.com', 54.49, 'CONFIRMED', '2024-01-15 10:30:00'),
 (1, 'usuario1@example.com', 35.99, 'CONFIRMED', '2024-01-20 14:45:00'),
-(2, 'usuario2@example.com', 89.97, 'CONFIRMED', '2024-01-22 09:15:00'),
+(2, 'usuario2@example.com', 88.54, 'CONFIRMED', '2024-01-22 09:15:00'),
 (1, 'usuario1@example.com', 22.90, 'CONFIRMED', '2024-02-01 16:20:00'),
-(3, 'usuario3@example.com', 41.49, 'CONFIRMED', '2024-02-05 11:00:00');
+(3, 'usuario3@example.com', 40.98, 'CONFIRMED', '2024-02-05 11:00:00');
 
 -- Insertar items para la orden 1 (usuario 1)
 INSERT INTO order_items (order_id, book_id, book_title, book_isbn, quantity, unit_price, subtotal) VALUES
