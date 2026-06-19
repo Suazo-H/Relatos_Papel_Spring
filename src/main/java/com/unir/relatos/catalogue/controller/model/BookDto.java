@@ -38,7 +38,7 @@ import lombok.Setter;
 public class BookDto implements Serializable
 {
     @JsonProperty("id")
-    public Integer id;
+    public Long id;
     @JsonProperty("title")
     public String title;
     @JsonProperty("author")

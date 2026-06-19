@@ -26,7 +26,7 @@ public class ModifyBooksService {
     private final ObjectMapper objectMapper;
 
     @Transactional
-    public GetBookResponseDto modifyBook(Integer bookId, WriteBookRequestDto bookDto) {
+    public GetBookResponseDto modifyBook(Long bookId, WriteBookRequestDto bookDto) {
         Book modifiedBook = bookMapper.asBook(bookId, bookDto);
         modifiedBook.setId(bookId);
         Book updatedBook = bookJpaRepository.save(modifiedBook);
@@ -34,7 +34,7 @@ public class ModifyBooksService {
     }
 
     @Transactional
-    public GetBookResponseDto modifyBook(Integer bookId, String jsonPart) {
+    public GetBookResponseDto modifyBook(Long bookId, String jsonPart) {
         GetBookResponseDto book = bookMapper
                 .asGetBookResponseDto(
                         bookJpaRepository

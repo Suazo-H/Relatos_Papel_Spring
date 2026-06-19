@@ -39,7 +39,7 @@ public class GetBookResponseDto implements Serializable {
     private final static long serialVersionUID = 1L;
 
     @JsonProperty("id")
-    public Integer id;
+    public Long id;
     @JsonProperty("title")
     public String title;
     @JsonProperty("author")

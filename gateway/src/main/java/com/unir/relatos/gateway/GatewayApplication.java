@@ -1,4 +1,4 @@
-package com.unir.relatos.catalogue;
+package com.unir.relatos.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,9 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class CatalogueApplication {
+public class GatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CatalogueApplication.class, args);
+        SpringApplication.run(GatewayApplication.class, args);
     }
 }

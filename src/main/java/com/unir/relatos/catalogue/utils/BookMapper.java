@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class BookMapper {
@@ -20,14 +21,14 @@ public class BookMapper {
         this.bookJpaRepository = bookJpaRepository;
     }
 
-    public List<BookDto> asBookDtoList(List<Book> books){
+    public List<BookDto> asBookDtoList(List<Book> books) {
         return books.stream()
                 .map(book -> BookDto.builder()
                         .id(book.getId())
                         .title(book.getTitle())
                         .author(book.getAuthor())
                         .genre(book.getGenre())
-                        .price(book.getPrice().doubleValue())
+                        .price(book.getPrice() != null ? book.getPrice().doubleValue() : null)
                         .stock(book.getStock())
                         .isbn(book.getIsbn())
                         .rating(book.getRating())
@@ -41,7 +42,7 @@ public class BookMapper {
                         .image(book.getImage())
                         .visible(book.getVisible())
                         .build())
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public GetBookResponseDto asGetBookResponseDto(Book book) {
@@ -50,7 +51,7 @@ public class BookMapper {
                 .title(book.getTitle())
                 .author(book.getAuthor())
                 .genre(book.getGenre())
-                .price(book.getPrice().doubleValue())
+                .price(book.getPrice() != null ? book.getPrice().doubleValue() : null)
                 .stock(book.getStock())
                 .isbn(book.getIsbn())
                 .rating(book.getRating())
@@ -66,15 +67,17 @@ public class BookMapper {
                 .build();
     }
 
-    public Book asBook(Integer bookId, WriteBookRequestDto bookDto) {
-        Book oldBook = bookJpaRepository.findById(bookId)
-                .orElseThrow(() -> new BookNotFoundException("Book with ID " + bookId + " not found."));
+    public Book asBook(Long bookId, WriteBookRequestDto bookDto) {
+        // Verify book exists
+        if (!bookJpaRepository.existsById(bookId)) {
+            throw new BookNotFoundException("Book with ID " + bookId + " not found.");
+        }
         return Book.builder()
                 .id(bookId)
                 .title(bookDto.getTitle())
                 .author(bookDto.getAuthor())
                 .genre(bookDto.getGenre())
-                .price(BigDecimal.valueOf(bookDto.getPrice()))
+                .price(bookDto.getPrice() != null ? BigDecimal.valueOf(bookDto.getPrice()) : null)
                 .stock(bookDto.getStock())
                 .isbn(bookDto.getIsbn())
                 .rating(bookDto.getRating())
@@ -91,8 +94,10 @@ public class BookMapper {
     }
 
     public Book asBook(GetBookResponseDto getBookResponseDto) {
-        Book oldBook = bookJpaRepository.findById(getBookResponseDto.getId())
-                .orElseThrow(() -> new BookNotFoundException("Book with ID " + getBookResponseDto.getId() + " not found."));
+        // Verify book exists
+        if (!bookJpaRepository.existsById(getBookResponseDto.getId())) {
+            throw new BookNotFoundException("Book with ID " + getBookResponseDto.getId() + " not found.");
+        }
         return Book.builder()
                 .id(getBookResponseDto.getId())
                 .title(getBookResponseDto.getTitle())
@@ -113,5 +118,4 @@ public class BookMapper {
                 .visible(getBookResponseDto.getVisible())
                 .build();
     }
-
 }
